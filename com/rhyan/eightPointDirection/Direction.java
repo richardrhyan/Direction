@@ -9,18 +9,18 @@ public enum Direction {
 	SOUTHWEST ("Southwest"),
 	WEST ("West"),
 	NORTHWEST ("Northwest");
-	
+
 	private String direction;
-	
+
 	private Direction(String direction) {
 		this.direction = direction;
 	}
-	
+
 	@Override
 	public String toString() {
 		return direction;
 	}
-	
+
 	/**
 	 * Returns the Direction immediately clockwise of this Direction.
 	 * @return Direction
@@ -34,7 +34,7 @@ public enum Direction {
 		}
 		return d;
 	}
-	
+
 	/**
 	 * Returns the Direction a number facings clockwise of this Direction.
 	 * @return Direction
@@ -43,10 +43,10 @@ public enum Direction {
 		Direction d = this;
 		for (int i = 0; i < steps; i++)
 			d = d.clockwise();
-		
+
 		return d;
 	}
-	
+
 	/**
 	 * Returns the Direction immediately counterclockwise of this Direction.
 	 * @return Direction
@@ -60,7 +60,7 @@ public enum Direction {
 		}
 		return d;
 	}
-	
+
 	/**
 	 * Returns the Direction a number facings counterclockwise of this Direction.
 	 * @return Direction
@@ -69,10 +69,10 @@ public enum Direction {
 		Direction d = this;
 		for (int i = 0; i < steps; i++)
 			d = d.counterClockwise();
-		
+
 		return d;
 	}
-	
+
 	/**
 	 * Returns the Direction opposite of this Direction.
 	 * @return Direction
@@ -80,13 +80,43 @@ public enum Direction {
 	public Direction oppositeDirection() {
 		return counterClockwise(4);
 	}
-	
+
 	/**
-	 * Returns True if North, East, South, or West. 
+	 * Returns True if North, East, South, or West.
 	 * @return boolean
 	 */
 	public boolean isCardinalDirection() {
 		return (this.ordinal()+1) % 2 != 0;
+	}
+
+	public int rowModifier() {
+		switch (this) {
+		case NORTH:
+		case NORTHWEST:
+		case NORTHEAST:
+			return -1;
+		case SOUTH:
+		case SOUTHWEST:
+		case SOUTHEAST:
+			return 1;
+		default:
+			return 0;
+		}
+	}
+
+	public int columnModifier() {
+		switch (this) {
+			case EAST:
+			case NORTHEAST:
+			case SOUTHEAST:
+				return -1;
+			case WEST:
+			case NORTHWEST:
+			case SOUTHWEST:
+				return 1;
+			default:
+				return 0;
+		}
 	}
 }
 
