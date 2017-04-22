@@ -89,7 +89,11 @@ public enum Direction {
 		return (this.ordinal()+1) % 2 != 0;
 	}
 
-	public int rowModifier() {
+	/**
+	 * Returns -1 if North, 1 if South and 0 if neither. 
+	 * @return int
+	 */
+	public int northOrSouth() {
 		switch (this) {
 		case NORTH:
 		case NORTHWEST:
@@ -104,16 +108,20 @@ public enum Direction {
 		}
 	}
 
-	public int columnModifier() {
+	/**
+	 * Returns 1 if East, -1 if West, or 0 if neither.
+	 * @return int
+	 */
+	public int eastOrWest() {
 		switch (this) {
 			case EAST:
 			case NORTHEAST:
 			case SOUTHEAST:
-				return -1;
+				return 1;
 			case WEST:
 			case NORTHWEST:
 			case SOUTHWEST:
-				return 1;
+				return -1;
 			default:
 				return 0;
 		}
